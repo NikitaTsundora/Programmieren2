@@ -1,0 +1,106 @@
+Git
+Git Status erklären
+Hilfe benutzt: https://youtu.be/a0_AcknhqDY?si=jMbh8GoiQt4AOmEh
+    • On branch b03
+Du befindest dich aktuell auf dem Branch b03. 
+    • Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git restore <file>..." to discard changes in working directory)
+          modified:   CONTRIBUTING.md
+          modified:   homework/b03.md
+      Die Dateien "CONTRIBUTING.md" und "homework/b03.md" wurden verändert, aber Git wird sie beim nächsten Commit nicht berücksichtigen, solange sie nicht mit "git add" gestaged werden.
+    • Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+          foo.java
+      "foo.java" wird noch nicht von Git verfolgt und wird beim nächstem commit ignoriert. "foo.java" muss erst mit "git add" aufgenommen werden. 
+    • no changes added to commit (use "git add" and/or "git commit -a")
+      Es wurde nichts geadded, also gibt es aktuell nichts, was committet werden könnte.
+
+Geben Sie eine Befehlssequenz an, mit der Sie nur die Änderungen in foo.java committen können
+git add foo.java
+git commit -m "foo.java added" 
+Git-Spiel
+      Öffnen Sie eine Konsole und beantworten Sie mit Hilfe der Befehle git checkout, git log und git show sowie git diff folgende Fragen:
+      Was passierte an tag 01?
+    • git show (Tag 1-1.5)
+    • Tag 1: "Mit seinem Schwert in der Hand und und einer leichten Rüstung bekleidet stieg Markus tapfer in den Dungeon ein. Schon bald stieß er auf die ersten Monster - grässliche, rattenähnliche Wesen."
+    • Tag 1.1: "Uh oh, da vorn ist eine seltsame Ratte. Sie kommt auf mich zu und greift mich an. Ich ziehe mich hinter einen Vorsprung zurück. Als sie mir nachsetzt, besiege ich sie mit meinem Schwert." Seine Experience erhöht sich um 1.
+    • Tag 1.2: "Es riecht hier irgendwie seltsam, abgestanden und moderig. Von irgendwo kommt eine schwache Beleuchtung her. Ich schleiche vorsichtig die Gänge entlang und sehe in der Ferne eine Tür.
+"
+    • Tag 1.3: "Vorsichtig öffne ich die Tür. Direkt dahinter ist wieder eine Ratte - aber sie schläft. Ich merke, dass mein Schwert gegen ein schlafendes Monster wirkungsvoller ist." Seine Experience erhöht sich um 2.
+    • Tag 1.4: "Ich schleiche weiter, immer auf der Hut vor Monstern. Irgendwo muss es doch hier tiefer in den Dungeon gehen? Langsam bekomme ich Hunger." Sein Hunger steigt um 4.
+    • Tag 1.5: "Mit seinem Schwert in der Hand und und einer leichten Rüstung bekleidet stieg Markus tapfer in den Dungeon ein. Schon bald stieß er auf die ersten Monster - grässliche, rattenähnliche Wesen. Mit all seiner Kraft und Entschlossenheit kämpfte Markus gegen sie und besiegte sie schließlich. Doch der Dungeon war voller Gefahren, und Markus musste tiefer absteigen, um seine Aufgabe zu erfüllen."
+      Wann hat der Held zum ersten Mal 4 experience Punkte?
+    • git log -p stats.md
+    • Alle Änderungen in Stats angezeigt. Am Tag 1.3 hatte der Held zum ersten Mal 4 experience Punkte.
+      Wann hat der Held zum ersten Mal 10 hunger Punkte?
+    • git log -p stats.md
+    • Alle Änderungen in Stats angezeigt. Am Tag 2 hatte der Held zum ersten Mal 10 hunger Punkte.
+      Wie viele Heiltränke hat der Held insgesamt in seinem Rucksack gehabt?
+    • git log -p rucksack.md
+    • Der Held hatte insgesamt 2 Heiltränke.
+      Was hat der Held im Shop gekauft? Und wie viel Gold hat er dafür bezahlt?
+    • git log -p shopkeeper.md
+    •  git log -p rucksack.md
+    • Der Held hat für 5 Gold ein leckeres Zwergenbrot und für weitere 5 Gold ein Heiltrank gekauft.
+      Was passierte zwischen tag 03 und tag 04, d.h. was änderte sich zwischen diesen Commits?
+    •  git diff 2ffebcfd908ad2abcc619429157b0832dac0dad3 (Tag 3) 39568d5e84832a2f168f3f473a612bc373e1bb63 (Tag 4)
+    • Er hatte nicht mehr seine 10 Gold, aber dafür hatte er 10 statt 5 Health-Punkten und keinen Hunger mehr (Aus 10 wurden 0 Hunger-Punkte)
+      Hat der Held etwas gegessen? Falls ja, was und wann?
+    • git log -p rucksack.md
+    • Er hat am Tag 3.17 ein Brot gegessen 
+Beim letzten Commit (tag 04.5) ist etwas schief gelaufen, es wurden versehentlich zu wenig experience Punkte eingestellt. Ändern Sie diesen letzten Commit und passen Sie die experience Punkte auf 42 an.
+    • git commit --amend 
+    • --amend ändert den letzten Commit
+    • Der letzte Commit wird angepasst, indem der Wert in stats.md auf 42 Experience Points korrigiert wird.
+Schreiben Sie die Geschichte in der Datei questlog.md fort und erzeugen Sie einen neuen Commit für tag 04.6. Ändern Sie bitte hierzu nur die eine Datei questlog.md.
+    • git add questlog.md 
+    • git commit -m "tag 04.6"
+    • "Er merkte aber nicht, wie ein Monster ihn vergiftet hat. Zum Glück wusste der Shopkeeper was den Helden erwartet und kam mit einem Gegengift zur Hilfe. Dafür forderte er aber eine ordentliche Bezahlung. Der Held dankte ihm und versprach 30 Gold für die Rettung."
+Schreiben Sie die Geschichte noch weiter fort (tag 04.7), aber ändern Sie diesmal mehrere Dateien, die an diesem Tag (neuer Commit) gemeinsam eingecheckt werden sollen.
+    •  git add questlog.md stats.md rucksack.md
+    •  git commit -m "tag 04.7"
+    • "Als er wieder hoch ging, trank er sein Heilungstrank, damit er vollgeheilt ist, falls jemand angreift. Oben angekommen bekam er eine große Belohnung von 200 Gold für seine tapferen Taten."
+    • stats -> Health von 8 auf 10
+    • rucksack -> -1 Heilungstrank und +200 Gold
+Fälschlicherweise wurden die Statuspunkte und die Ausrüstung bisher gemeinsam in der Datei stats.md geführt. Korrigieren Sie das und verschieben Sie die Ausrüstungsgegenstände aus der Datei stats.md in eine neue Datei gear.md. Checken Sie Ihre Änderungen als tag 04.8 (neuer Commit) gemeinsam ein.
+    • git add stats.md gear.md 
+    • git commit -m "tag 04.8"
+    • In die neue Datei wurde die Tabelle mit weapon -> sword (3 dmg) und armor -> light (2 dmg) geamacht. Aus der Tabelle stats.md wurden diese Ausrüstungen entfernt.
+Commit-Meldungen
+Diskutieren Sie jeweils, was Ihnen an den Commits auffällt: Was gefällt Ihnen, was stört Sie? Schlagen Sie Verbesserungen vor. 
+Die Commits sagen genau, was geändert wurde. Dabei bleiben sie kurz und verständlich. Mir gefällt nicht, dass so viele Datein gleichzeitig verändert wurden. Man verliert bei 8 oder 10 leider den durchblick. Der erste Commit kommentiert viel, beim zweiten sind es sehr wenig Kommentare.  
+
+Gradle
+Legen Sie in der Konsole ein neues Gradle-Projekt für eine Java-Applikation an (ohne IDE!). Das Build-Script soll in Groovy erzeugt und als Test-API soll JUnit5 oder JUnit6 verwendet werden.
+    • gradle init 
+Wie finden Sie auf der Konsole heraus, welche Tasks es gibt? Erklären Sie das Projektlayout, d.h. wo kommen beispielsweise die Java-Dateien hin?
+    • Mit Hilfe von gradle tasks kann man sich alle möglichen tasks ausgeben lassen.
+    • src/main/java -> Code 
+    • src/test/java -> Tests 
+Erklären Sie, in welche Abschnitte das generierte Buildskript unterteilt ist und welche Aufgaben diese Abschnitte jeweils erfüllen. Gehen Sie dabei im Detail auf das Plugin application und die dort bereitgestellten Tasks und deren Abhängigkeiten untereinander ein.
+    • plugins -> Fügt zusätzliche Funktionen in Gradle hinzu
+    • repositories -> Definiert, woher externe Bibliotheken geladen werden 
+    • dependencies -> Verwaltung aller Abhängigkeiten (Libraries) 
+    • application -> Definiert die Startklasse (main-Methode) und wird benötigt, um die App zu starten
+    • test -> Aktiviert JUnit 5 (Jupiter Plattform) 
+    • Plugin application: 
+            ▪ run -> Startet die Applikation
+            ▪ startScripts -> Erstellt betriebssystemspezifische Startskripte (Windows und Linux), um die Anwendung als JVM-Programm auszuführen
+            ▪ InstallDist -> Installiert die Anwendung in ein Zielverzeichnis (lokal ausführbare Version mit allen nötigen Dateien)
+            ▪ distZip -> Erstellt ein vollständiges ZIP-Archiv der Anwendung (JAR-Datei, benötigte Bibliotheken, Startskripte)
+            ▪ distTar -> Erstellt ein TAR-Archiv (ähnlich wie ZIP) 
+    • https://docs.gradle.org/current/userguide/application_plugin.html
+Öffnen Sie das Projekt in Ihrer IDE. Wie können Sie hier die verschiedenen Tasks ansteuern?
+                • build.gradle
+Anlegen eines Java-Projektes als Basisprojekt für das Semester
+Testen Sie bitte die genutzte Java-Version:
+IDE: Erstellen Sie ein Programm, welches die Anweisung IO.println(System.getProperty("java.version")); ausführt. Beim Start über die IDE sollte dabei die Ausgabe 25.0.2 (oder ähnlich) herauskommen. Wichtig ist die "25".
+    • public class Main {
+ public static void main(String[] args) {
+ System.out.println(System.getProperty("java.version"));
+ }
+ }
+    • Ergebnis: 18.0.2.1 -> Muss noch Version erneuern!
+Erweitern Sie nun Ihr Gradle-Setup und setzen Sie das Gradle-Plugin Spotless zum einheitlichen Formatieren Ihres Sources-Codes ein. Schreiben Sie ein kleine Demo mit einer main()-Methode und demonstrieren Sie die Wirkung von Spotless.
+Das Spotless-Plugin wird in Gradle eingebunden und konfiguriert, um Java-Code automatisch zu formatieren. Mit spotlessCheck kann geprüft werden, ob der Code korrekt formatiert ist, und mit spotlessApply wird der Code automatisch in ein einheitliches Format gebracht. Eine Demo zeigt den Unterschied zwischen unformatiertem und automatisch formatiertem Java-Code. 
