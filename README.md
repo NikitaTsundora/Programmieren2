@@ -1,2 +1,1 @@
-# Programmieren2
-Hausaufgaben für Programmieren 2
+REPO FÜR PROGRAMMIEREN 2. Hier werden die Hausaufgaben hochgeladen!
